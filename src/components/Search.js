@@ -7,7 +7,9 @@ class Search extends React.Component {
         const value = this.inputref.current.value
         alert(`value inside input ref is  ${value}`)
     }
+
     //this is done for taking input value from page
+    //this methdo is used when we want two way maping
     // state = {
     //     username: "",
     // }
