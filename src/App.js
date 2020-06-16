@@ -11,11 +11,16 @@ class App extends React.Component {
     //fetch user from github
     // alert(`function fetchdata called successfully with username: ${username}`)
     try {
-      //using rest api github
+      // using rest api github
       const res = await fetch(`https://api.github.com/users/${username}`,)
       if (res.ok) {
         const data = await res.json()
-        console.log(data)
+        // console.log(data)
+
+        //this will update internal state (basically saves the user data)
+        return this.setState({
+          user: data
+        })
       }
 
     }
