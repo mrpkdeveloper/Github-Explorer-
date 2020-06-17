@@ -64,8 +64,9 @@ class App extends React.Component {
         {/* if error found then only  display para */}
         {loading && (<p>loading....</p>)}
         {error && <p className="text-danger">{error}</p>}
+
         {/* when there is no loading no error and user is present then render usercard component */}
-        {!loading && !error && user && <Usercard />}
+        {!loading && !error && user && <Usercard user={user} />}
       </div>
     )
   }
