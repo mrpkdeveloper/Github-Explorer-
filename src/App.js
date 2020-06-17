@@ -2,6 +2,9 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Search from './components/Search';
+import Usercard from './components/Usercard';
+
+
 class App extends React.Component {
   state = {
     user: null,
@@ -53,7 +56,7 @@ class App extends React.Component {
 
   render() {
 
-    const { error, loading } = this.state
+    const { error, loading, user } = this.state
 
     return (
       <div>
@@ -61,6 +64,8 @@ class App extends React.Component {
         {/* if error found then only  display para */}
         {loading && (<p>loading....</p>)}
         {error && <p className="text-danger">{error}</p>}
+        {/* when there is no loading no error and user is present then render usercard component */}
+        {!loading && !error && user && <Usercard />}
       </div>
     )
   }
