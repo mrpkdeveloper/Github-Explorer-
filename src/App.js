@@ -76,7 +76,7 @@ class App extends React.Component {
 
   render() {
 
-    const { error, loading, user } = this.state
+    const { userDataError, reposerror, loading, user } = this.state
 
     return (
       <div>
