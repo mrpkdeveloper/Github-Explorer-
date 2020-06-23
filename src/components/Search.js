@@ -24,7 +24,7 @@ class Search extends React.Component {
         const { fetchdata } = this.props
 
         return (
-            <nav class="navbar navbar-dark bg-dark center">
+            <nav className="navbar navbar-dark bg-dark center">
                 <div className="my-3 mx-auto">
                     {/* using ref */}
                     {/* <input ref={this.inputref} className="input" placeholder="Enter username" type="text" /> */}

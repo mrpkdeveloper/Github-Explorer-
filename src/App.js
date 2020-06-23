@@ -11,7 +11,8 @@ class App extends React.Component {
     user: null,
     repos: [],
     userDataError: null,
-    loading: false
+    loading: false,
+    page: 1
 
   }
 
@@ -32,11 +33,12 @@ class App extends React.Component {
 
 
   fetchrepos = async (username) => {
-    const res = await fetch(`https://api.github.com/users/${username}/repos?page=1`)
+    const { page } = this.state
+    const res = await fetch(`https://api.github.com/users/${username}/repos?page=${page}`)
     if (res.ok) {
       const data = await res.json()
       // console.log(data)
-      return { data }
+      return { data, page: page + 1 }
     }
     const error = (await res.json()).message
     return { error }
@@ -54,13 +56,13 @@ class App extends React.Component {
         ])
 
         if (user.data !== undefined && repos.data !== undefined) {
-          return this.setState({ user: user.data, repos: repos.data, loading: false })
+          return this.setState({ user: user.data, repos: repos.data, page: repos.page, loading: false })
         }
 
         this.setState({
           userDataError: user.error,
           reposerror: repos.error,
-          loading: false
+          loading: false,
         })
 
       } catch (err) {
@@ -75,12 +77,21 @@ class App extends React.Component {
 
   }
 
+  loadmore = async () => {
+    const { page, data } = await this.fetchrepos(this.state.user.login)
+    if (data)
+      this.setState((state) => ({
+        repos: [...state.repos, ...data],
+        page
+      }))
+  }
+
   render() {
 
     const { userDataError, reposerror, loading, user, repos } = this.state
 
     return (
-      <div>
+      <div className="container">
         <Search fetchdata={this.fetchData} />
         {/* if error found then only  display para */}
         {loading && (<p>loading....</p>)}
@@ -90,7 +101,8 @@ class App extends React.Component {
         {!loading && !userDataError && user && <Usercard user={user} />}
         {reposerror && <p className="text-danger">{reposerror}</p>}
 
-        {!loading && !reposerror && repos.map((repo, index) => <Repocard key={index} repo={repo} />)}
+        {!loading && !reposerror && repos.map((repo) => <Repocard key={repo.id} repo={repo} />)}
+        <button className="btn btn-success" onClick={this.loadmore}>Load More</button>
       </div>
     )
   }
