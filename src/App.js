@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import Search from './components/Search';
 import Usercard from './components/Usercard';
+import Repocard from './components/Repocard';
 
 
 class App extends React.Component {

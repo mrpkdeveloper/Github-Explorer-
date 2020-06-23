@@ -24,12 +24,14 @@ class Search extends React.Component {
         const { fetchdata } = this.props
 
         return (
-            <div>
-                {/* using ref */}
-                {/* <input ref={this.inputref} className="input" placeholder="Enter username" type="text" /> */}
-                <input value={username} onChange={this.usernamechange} className="input" placeholder="Enter username" type="text" />
-                <button onClick={() => { fetchdata(username) }}>Submit</button>
-            </div>
+            <nav class="navbar navbar-dark bg-dark center">
+                <div className="my-3 mx-auto">
+                    {/* using ref */}
+                    {/* <input ref={this.inputref} className="input" placeholder="Enter username" type="text" /> */}
+                    <input className="mx-2" value={username} onChange={this.usernamechange} className="input" placeholder="Enter username" type="text" />
+                    <button className="btn btn-light mx-2 btn-sm mb-2" onClick={() => { fetchdata(username) }}>Submit</button>
+                </div>
+            </nav>
         )
     }
 }
