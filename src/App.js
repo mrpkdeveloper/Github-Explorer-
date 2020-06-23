@@ -77,7 +77,7 @@ class App extends React.Component {
 
   render() {
 
-    const { userDataError, reposerror, loading, user } = this.state
+    const { userDataError, reposerror, loading, user, repos } = this.state
 
     return (
       <div>
@@ -89,6 +89,8 @@ class App extends React.Component {
         {/* when there is no loading no error and user is present then render usercard component */}
         {!loading && !userDataError && user && <Usercard user={user} />}
         {reposerror && <p className="text-danger">{reposerror}</p>}
+
+        {!loading && !reposerror && repos.map((repo, index) => <Repocard key={index} repo={repo} />)}
       </div>
     )
   }
